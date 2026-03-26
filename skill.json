@@ -1,0 +1,56 @@
+{
+  "$schema": "https://skill.json.org/schema/1.0.0/skill.schema.json",
+  "name": "auto-docs",
+  "version": "1.0.0",
+  "description": "Skills for scaffolding and navigating the standard Automatic docs/ directory structure in any project.",
+  "author": {
+    "name": "Christopher Skene",
+    "email": "chris.skene@gmail.com"
+  },
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:velvet-tiger/auto-docs.git"
+  },
+  "keywords": [
+    "documentation",
+    "docs",
+    "scaffold",
+    "automatic",
+    "structure",
+    "adr",
+    "architecture"
+  ],
+  "skills": [
+    {
+      "name": "automatic-docs",
+      "path": "./skills/automatic-docs",
+      "description": "Scaffold the standard Automatic docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to \"set up docs\", \"scaffold documentation\", \"create the docs structure\", or \"add docs to this project\".",
+      "category": "documents",
+      "tags": [
+        "documentation",
+        "scaffold",
+        "docs",
+        "automatic",
+        "structure",
+        "frontmatter",
+        "adr",
+        "architecture"
+      ]
+    },
+    {
+      "name": "automatic-docs-find",
+      "path": "./skills/automatic-docs-find",
+      "description": "Find the right documentation file in a project using the standard Automatic docs/ structure. Use when asked where to find something, where to document something, which file covers a topic, or when about to read or write docs and need to know the correct location.",
+      "category": "documents",
+      "tags": [
+        "documentation",
+        "docs",
+        "navigation",
+        "automatic",
+        "find",
+        "lookup"
+      ]
+    }
+  ]
+}
