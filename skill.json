@@ -23,8 +23,8 @@
   ],
   "skills": [
     {
-      "name": "common-docs",
-      "path": "./skills/common-docs",
+      "name": "common-docs-scaffold",
+      "path": "./skills/common-docs-scaffold",
       "description": "Scaffold the standard Common docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to \"set up docs\", \"scaffold documentation\", \"create the docs structure\", or \"add docs to this project\".",
       "category": "documents",
       "tags": [
