@@ -1,9 +1,9 @@
 ---
-name: automatic-docs-find
-description: Find the right documentation file in a project using the standard Automatic docs/ structure. Use when asked where to find something, where to document something, which file covers a topic, or when about to read or write docs and need to know the correct location. Maps questions and topics to canonical file paths.
+name: common-docs-find
+description: Find the right documentation file in a project using the standard Common docs/ structure. Use when asked where to find something, where to document something, which file covers a topic, or when about to read or write docs and need to know the correct location. Maps questions and topics to canonical file paths.
 ---
 
-# Automatic Docs Finder
+# Common Docs Finder
 
 Map any question or topic to the correct file in the standard `docs/` structure.
 
@@ -56,7 +56,7 @@ Map any question or topic to the correct file in the standard `docs/` structure.
 1. **Identify the topic** from the user's question or task.
 2. **Map it** using the lookup table above. When multiple files could apply, name all of them.
 3. **Check whether the file exists** before reading it — the project may not have scaffolded every section.
-4. **If the file doesn't exist**, say so and suggest either creating it (load `automatic-docs` skill) or checking `docs/index.md` for what is available.
+4. **If the file doesn't exist**, say so and suggest either creating it (load `common-docs` skill) or checking `docs/index.md` for what is available.
 5. **If the topic doesn't fit any section**, it likely belongs in `docs/context/` (domain knowledge) or a new `docs/guides/` entry.
 
 ## Where to Write New Content

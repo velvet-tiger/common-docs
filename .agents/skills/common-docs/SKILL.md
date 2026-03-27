@@ -1,11 +1,11 @@
 ---
-name: automatic-docs
-description: Scaffold the standard Automatic docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to "set up docs", "scaffold documentation", "create the docs structure", or "add docs to this project". Read references/specification.md for the full file-by-file content spec.
+name: common-docs
+description: Scaffold the standard Common docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to "set up docs", "scaffold documentation", "create the docs structure", or "add docs to this project". Read references/specification.md for the full file-by-file content spec.
 ---
 
-# Automatic Docs Scaffolder
+# Common Docs Scaffolder
 
-Scaffold the standard `docs/` structure defined in the Automatic documentation specification.
+Scaffold the standard `docs/` structure defined in the Common documentation specification.
 
 Read `references/specification.md` before writing any files — it defines required content for every file.
 

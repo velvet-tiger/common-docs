@@ -1,8 +1,8 @@
 {
   "$schema": "https://skill.json.org/schema/1.0.0/skill.schema.json",
-  "name": "auto-docs",
+  "name": "common-docs",
   "version": "1.0.0",
-  "description": "Skills for scaffolding and navigating the standard Automatic docs/ directory structure in any project.",
+  "description": "Skills for scaffolding and navigating the standard Common docs/ directory structure in any project.",
   "author": {
     "name": "Christopher Skene",
     "email": "chris.skene@gmail.com"
@@ -10,7 +10,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "git@github.com:velvet-tiger/auto-docs.git"
+    "url": "git@github.com:velvet-tiger/common-docs.git"
   },
   "keywords": [
     "documentation",
@@ -23,9 +23,9 @@
   ],
   "skills": [
     {
-      "name": "automatic-docs",
-      "path": "./skills/automatic-docs",
-      "description": "Scaffold the standard Automatic docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to \"set up docs\", \"scaffold documentation\", \"create the docs structure\", or \"add docs to this project\".",
+      "name": "common-docs",
+      "path": "./skills/common-docs",
+      "description": "Scaffold the standard Common docs/ directory structure in a project. Creates all section directories and stub files with correct frontmatter. Use when asked to \"set up docs\", \"scaffold documentation\", \"create the docs structure\", or \"add docs to this project\".",
       "category": "documents",
       "tags": [
         "documentation",
@@ -39,9 +39,9 @@
       ]
     },
     {
-      "name": "automatic-docs-find",
-      "path": "./skills/automatic-docs-find",
-      "description": "Find the right documentation file in a project using the standard Automatic docs/ structure. Use when asked where to find something, where to document something, which file covers a topic, or when about to read or write docs and need to know the correct location.",
+      "name": "common-docs-find",
+      "path": "./skills/common-docs-find",
+      "description": "Find the right documentation file in a project using the standard Common docs/ structure. Use when asked where to find something, where to document something, which file covers a topic, or when about to read or write docs and need to know the correct location.",
       "category": "documents",
       "tags": [
         "documentation",

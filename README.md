@@ -1,4 +1,4 @@
-# Automatic Documentation Structure Specification
+# Common Docs
 
 A standard structure, naming conventions, and content expectations for the `docs/` directory across all projects. Designed to serve both human contributors and AI coding agents.
 
@@ -49,7 +49,7 @@ docs/
 
 ## Status
 
-This specification is versioned and maintained. Changes follow the same ADR process as technical decisions.
+This specification is versioned and maintained.
 
 ## License
 
