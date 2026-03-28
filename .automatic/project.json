@@ -3,10 +3,13 @@
   "description": "",
   "directory": "/Users/xtfer/working/velvet-tiger/common-docs",
   "skills": [
-    "skill-json-generator"
+    "skill-json-generator",
+    "automatic"
   ],
   "local_skills": [],
-  "mcp_servers": [],
+  "mcp_servers": [
+    "automatic"
+  ],
   "providers": [],
   "agents": [
     "claude",
@@ -18,9 +21,33 @@
   "last_activity": "2026-03-27T20:38:16.118369+00:00",
   "instruction_mode": "per-agent",
   "instruction_file_hashes": {
-    "AGENTS.md": "62381859a896db11",
-    "CLAUDE.md": "62381859a896db11"
+    "CLAUDE.md": "62381859a896db11",
+    "AGENTS.md": "62381859a896db11"
   },
   "custom_agents": [],
-  "custom_commands": []
+  "custom_commands": [],
+  "skill_sources": {
+    "skill-json-generator": {
+      "source": "velvet-tiger/skill.json",
+      "id": "velvet-tiger/skill.json/skill-json-generator",
+      "kind": "github"
+    },
+    "automatic": {
+      "source": "automatic/automatic-app",
+      "id": "automatic/automatic-app/automatic",
+      "kind": "bundled"
+    }
+  },
+  "skill_collections": {
+    "automatic": "automatic-skills"
+  },
+  "mcp_server_specs": {
+    "automatic": {
+      "type": "stdio",
+      "command": "/Applications/Automatic.app/Contents/MacOS/automatic",
+      "args": [
+        "mcp-serve"
+      ]
+    }
+  }
 }

@@ -5,7 +5,7 @@
   "description": "Skills for scaffolding and navigating the standard Common docs/ directory structure in any project.",
   "author": {
     "name": "Christopher Skene",
-    "email": "chris.skene@gmail.com"
+    "email": "chris@velvettiger.com.au"
   },
   "license": "MIT",
   "repository": {
@@ -36,6 +36,22 @@
         "frontmatter",
         "adr",
         "architecture"
+      ]
+    },
+    {
+      "name": "common-docs-write",
+      "path": "./skills/common-docs-write",
+      "description": "Write the actual content of a specific documentation file following the Common docs/ specification. Use when asked to write, fill in, or populate a doc — e.g. \"write the architecture overview\", \"fill in the threat model\", \"write the getting started guide\", \"document our API endpoints\", \"write an ADR for X\".",
+      "category": "documents",
+      "tags": [
+        "documentation",
+        "docs",
+        "write",
+        "automatic",
+        "content",
+        "adr",
+        "architecture",
+        "runbook"
       ]
     },
     {

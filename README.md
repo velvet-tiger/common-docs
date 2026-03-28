@@ -53,7 +53,7 @@ docs/
 
 ## Skills
 
-This project includes two AI agent skills for working with Common Docs:
+This project includes three AI agent skills for working with Common Docs:
 
 ### common-docs-scaffold
 
@@ -61,10 +61,7 @@ Scaffolds the standard `docs/` directory structure in a project. Creates all sec
 
 **Use when:** Setting up docs, scaffolding documentation, creating the docs structure, or adding docs to a project.
 
-**Usage:**
-```
-/common-docs
-```
+**Usage:** `/common-docs-scaffold`
 
 The skill will:
 1. Check what exists in the project root
@@ -72,16 +69,28 @@ The skill will:
 3. Create files using the content spec in `references/specification.md`
 4. Add the documentation reference table to `AGENTS.md` or `CLAUDE.md`
 
+### common-docs-write
+
+Writes the actual content of a specific documentation file. Runs a structured interview for the target file type, explores the codebase to fill in what it can, then produces a complete document meeting the spec's "Must contain" requirements.
+
+**Use when:** Writing, filling in, or populating a doc — e.g. "write the architecture overview", "fill in the threat model", "write the getting started guide", "document our API endpoints", "write an ADR for X".
+
+**Usage:** `/common-docs-write`
+
+The skill will:
+1. Identify the target file and look up its content requirements in the spec
+2. Ask a set of targeted questions specific to that file type
+3. Explore the codebase to fill gaps without bothering you
+4. Write the complete file — no TODOs or placeholders
+5. Offer to update related files (index, ADR index, etc.)
+
 ### common-docs-find
 
 Finds the right documentation file for any topic using the standard Common Docs structure. Maps questions and topics to canonical file paths.
 
 **Use when:** Looking for where to find something, where to document something, which file covers a topic, or before reading/writing docs to know the correct location.
 
-**Usage:**
-```
-/common-docs-find
-```
+**Usage:** `/common-docs-find`
 
 The skill will identify the topic from your question and map it to the correct file path using its lookup table.
 
@@ -89,14 +98,10 @@ The skill will identify the topic from your question and map it to the correct f
 
 Skills are available in two locations:
 - `skills/` — Packaged skills for distribution (referenced by `skill.json`)
-- `.agents/skills/` — Local skills for this project
 
-To use these skills in another project, add them to your project's `.automatic/project.json`:
-```json
-{
-  "skills": ["common-docs", "common-docs-find"]
-}
-```
+## Third-Party Support
+
+Common Docs is available as a plugin [Automatic](https://tryautomatic.app).
 
 ## Status
 
