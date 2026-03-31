@@ -2,6 +2,8 @@
 
 A standard structure, naming conventions, and content expectations for the `docs/` directory across all projects. Designed to serve both human contributors and AI coding agents.
 
+Common Docs uses best practices from Anthropic and OpenAI to produce an LLM-friendly documentation approach.
+
 ## Overview
 
 This specification defines how to organize project documentation using a progressive disclosure model:
