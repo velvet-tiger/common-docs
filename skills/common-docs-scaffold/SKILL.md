@@ -91,7 +91,7 @@ docs/
 
 ## Frontmatter
 
-Every file must open with:
+Every file **except `index.md`** must open with:
 
 ```yaml
 ---
@@ -99,10 +99,48 @@ title: Short descriptive title
 description: One sentence describing what this document contains.
 status: draft
 updated: YYYY-MM-DD
+type: <see Type values below>
+generated:
+  by: agent/common-docs-scaffold
+  at: <ISO8601 timestamp of scaffolding>
 ---
 ```
 
-Use today's date for `updated`. Set `status: draft` on all stub files.
+Use today's date for `updated`. Set `status: draft` on all stub files. Don't add `tags`, `resource`, `sources`, or `stale_after` at scaffold time — there's no real content yet to infer them from; leave that to `common-docs-write`/`common-docs-write-all`.
+
+### Type values
+
+Set `type` per section:
+
+| Path pattern | `type` value |
+|---|---|
+| `context/*.md` | `Context` |
+| `architecture/*.md` | `Architecture` |
+| `adr/template.md` | `Template` |
+| `plans/roadmap.md` | `Plan` |
+| `plans/epics/*.md` | `Epic` |
+| `plans/features/*.md` | `Feature` |
+| `api/*.md` | `API` |
+| `configuration/*.md` | `Configuration` |
+| `integrations/*.md` | `Integration` |
+| `security/*.md` | `Security` |
+| `guides/*.md` | `Guide` |
+| `operations/*.md` (top-level files) | `Operations` |
+| `operations/runbooks/*.md` | `Runbook` |
+| `migrations/*.md` | `Migration` |
+| `changelog/*.md` | `Changelog` |
+
+### `index.md` stubs
+
+`index.md` is a reserved filename — it never carries frontmatter, except the bundle-root `docs/index.md`, which carries exactly one key:
+
+```yaml
+---
+okf_version: "0.2"
+---
+```
+
+Every other `index.md` stub (including nested ones like `plans/epics/index.md`, `operations/runbooks/index.md`) has no frontmatter at all — just a stub heading and a one-line placeholder note, to be filled in with a real link list once the section has content.
 
 ## AGENTS.md Block
 

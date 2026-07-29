@@ -130,8 +130,8 @@ Write files in this sequence so that each file can reference what came before:
 - `docs/plans/index.md`
 
 **9. ADR** (decisions log)
-- `docs/adr/template.md` — use the exact template from the specification
-- `docs/adr/index.md` — empty table ready to receive ADRs
+- `docs/adr/template.md` — use the exact template from the specification (`type: Template`)
+- `docs/adr/index.md` — empty table ready to receive ADRs (no frontmatter — see Content Quality Rules)
 
 **10. Integrations** (one file per third-party service found in code)
 - `docs/integrations/<service-name>.md` for each discovered integration
@@ -151,11 +151,33 @@ Write files in this sequence so that each file can reference what came before:
 ## Content Quality Rules
 
 - **Never leave placeholder text.** Instead of "TODO: fill this in", write `> Not yet defined — update when X is decided.`
-- **Every file must have complete frontmatter** with `title`, `description`, `status: draft`, and `updated: YYYY-MM-DD` (today's date).
-- **Section index files** must list every file in the section with a one-line description.
+- **Every file except `index.md` must have complete frontmatter** with `title`, `description`, `status: draft`, `updated: YYYY-MM-DD` (today's date), `type` (see table below), and `generated: { by: agent/common-docs-write-all, at: <ISO8601 timestamp of this run> }`.
+- **`index.md` files never carry frontmatter**, except `docs/index.md` (the bundle root), which carries exactly `okf_version: "0.2"` and nothing else. Every other `index.md` (including nested ones like `plans/epics/index.md`) is a plain heading + link list, no frontmatter block.
+- **Section index files** must list every file in the section with a one-line description, pulled from that file's own frontmatter `description`.
 - **Guides and runbooks** must have numbered steps — not bullet points.
 - **Diagrams** in architecture files must be valid Mermaid syntax.
 - **Tables** for environment variables must cover every variable found in `.env.example` or config files.
+- **Optional fields — only when genuinely inferable, never fabricated:** `tags` (2–4 keywords per file, from section + content); `resource` (only on `integrations/<service>.md`, only when a real service URL was found); `sources` (only on `context/domain.md`, `integrations/*.md`, `security/threat-model.md`, only when a real external citation was found); `stale_after` (`updated` + 6 months on `security/*` and `configuration/*`; `updated` + 12 months on `architecture/*`, `context/*`, `integrations/*`; unset elsewhere). Never set `verified` — that's added later by a human.
+
+### Type values
+
+| Path pattern | `type` value |
+|---|---|
+| `context/*.md` | `Context` |
+| `architecture/*.md` | `Architecture` |
+| `adr/template.md` | `Template` |
+| `plans/roadmap.md` | `Plan` |
+| `plans/epics/*.md` | `Epic` |
+| `plans/features/*.md` | `Feature` |
+| `api/*.md` | `API` |
+| `configuration/*.md` | `Configuration` |
+| `integrations/*.md` | `Integration` |
+| `security/*.md` | `Security` |
+| `guides/*.md` | `Guide` |
+| `operations/*.md` (top-level files) | `Operations` |
+| `operations/runbooks/*.md` | `Runbook` |
+| `migrations/*.md` | `Migration` |
+| `changelog/*.md` | `Changelog` |
 
 ---
 

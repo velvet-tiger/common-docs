@@ -35,7 +35,7 @@ Read `[references/specification.md](https://github.com/velvet-tiger/common-docs/
 
 ## Frontmatter
 
-Every file must open with:
+Every file **except `index.md`** must open with:
 
 ```yaml
 ---
@@ -43,6 +43,10 @@ title: Short descriptive title
 description: One sentence describing what this document contains.
 status: draft
 updated: YYYY-MM-DD
+type: <see Type values below>
+generated:
+  by: agent/common-docs-write
+  at: <ISO8601 timestamp of this write>
 authors:
   - Name
 related:
@@ -50,7 +54,39 @@ related:
 ---
 ```
 
-Use today's date for `updated`. Set `status: draft` unless told otherwise. Omit `authors` and `related` if not known.
+Use today's date for `updated`. Set `status: draft` unless told otherwise. Omit `authors` and `related` if not known. `generated` is always stamped — it records this write, not the file's original author.
+
+### Type values
+
+| Path pattern | `type` value |
+|---|---|
+| `context/*.md` | `Context` |
+| `architecture/*.md` | `Architecture` |
+| `adr/NNNN-*.md` | `ADR` |
+| `plans/roadmap.md` | `Plan` |
+| `plans/epics/*.md` | `Epic` |
+| `plans/features/*.md` | `Feature` |
+| `api/*.md` | `API` |
+| `configuration/*.md` | `Configuration` |
+| `integrations/*.md` | `Integration` |
+| `security/*.md` | `Security` |
+| `guides/*.md` | `Guide` |
+| `operations/*.md` (top-level files) | `Operations` |
+| `operations/runbooks/*.md` | `Runbook` |
+| `migrations/*.md` | `Migration` |
+| `changelog/*.md` | `Changelog` |
+
+### Optional fields — add only when genuinely inferable, never fabricated
+
+- **`tags`** — 2–4 short keywords drawn from the section and the content actually gathered for this file.
+- **`resource`** — only on `integrations/<service>.md`, and only when a canonical service URL was actually found (README, `package.json` `homepage`/`repository`, config).
+- **`sources`** — only on files summarizing external material (`context/domain.md` external standards, `integrations/*.md` linking to the service's own docs, `security/threat-model.md` referencing external frameworks) and only when a real citation was found.
+- **`stale_after`** — `updated` + 6 months on `security/*` and `configuration/*`; `updated` + 12 months on `architecture/*`, `context/*`, `integrations/*`. Not set elsewhere.
+- **`verified`** — never set by this skill. It's added later by a human confirming the doc, using `verified: [{ by: human:<id>, at: <ISO8601> }]`. Mention this convention if the user asks how to mark a doc as reviewed.
+
+### `index.md`
+
+`index.md` is a reserved filename — no frontmatter (except `docs/index.md`'s `okf_version: "0.2"`, which this skill shouldn't need to touch — it's set once at scaffold time). If asked to update an `index.md`'s content, write a heading, a one-line section description, and a list of links with descriptions pulled from each linked file's own frontmatter `description` — never add a frontmatter block to it.
 
 ---
 
@@ -58,6 +94,7 @@ Use today's date for `updated`. Set `status: draft` unless told otherwise. Omit 
 
 - Never edit an accepted ADR — write a new one to supersede it
 - Number sequentially from the highest existing (`0001`, `0002`, …); file name: `NNNN-short-kebab-title.md`
+- Set `type: ADR` in the new file's frontmatter (if copied from `template.md`, change its `type: Template` to `type: ADR`)
 - After writing, add a row to `docs/adr/index.md`
 - If superseding an existing ADR, set `superseded-by: NNNN-new-title.md` in the old ADR's frontmatter
 

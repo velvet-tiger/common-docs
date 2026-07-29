@@ -86,6 +86,22 @@
         "architecture",
         "runbook"
       ]
+    },
+    {
+      "name": "common-docs-convert-to-okf",
+      "path": "./skills/common-docs-convert-to-okf",
+      "description": "Convert an existing Common docs/ tree to be OKF (Open Knowledge Format) v0.2 conformant, by adding the required `type` frontmatter field and fixing index.md frontmatter. Use when asked to \"convert docs to OKF\", \"make this OKF compatible\", \"retrofit for OKF\", or \"update docs for OKF conformance\".",
+      "category": "documents",
+      "tags": [
+        "documentation",
+        "docs",
+        "okf",
+        "automatic",
+        "convert",
+        "migration",
+        "frontmatter",
+        "metadata"
+      ]
     }
   ]
 }
