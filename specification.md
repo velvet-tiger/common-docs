@@ -1,6 +1,6 @@
 # Automatic Project Documentation Structure Specification
 
-> **Version:** 1.1  
+> **Version:** 1.2  
 > **Status:** Draft  
 > **Purpose:** Defines the standard structure, naming conventions, and content expectations for the `docs/` directory across all projects. Designed to serve both human contributors and AI coding agents, and to produce `docs/` trees that conform to the [Open Knowledge Format (OKF) v0.2](https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md).
 
