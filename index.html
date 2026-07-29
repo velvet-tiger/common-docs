@@ -1,0 +1,564 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Common Docs: a standard docs/ structure for humans and AI agents</title>
+<meta name="description" content="A standard structure, naming convention, and content spec for the docs/ directory. Built for progressive disclosure, versioned with code, and conformant with OKF v0.2.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📄</text></svg>">
+<style>
+  :root {
+    --bg: #0b0d10;
+    --bg-raised: #12151a;
+    --border: #232830;
+    --text: #e7e9ec;
+    --text-dim: #9aa3af;
+    --accent: #6ee7b7;
+    --accent-strong: #34d399;
+    --code-bg: #0f1216;
+    --badge-bg: #171b21;
+    --link: #7dd3fc;
+    --shadow: 0 1px 0 rgba(255,255,255,0.02) inset;
+  }
+  @media (prefers-color-scheme: light) {
+    :root {
+      --bg: #fbfbfa;
+      --bg-raised: #ffffff;
+      --border: #e4e2dd;
+      --text: #1c1e21;
+      --text-dim: #5b6169;
+      --accent: #0f9d68;
+      --accent-strong: #0a7a4f;
+      --code-bg: #f3f2ee;
+      --badge-bg: #f0efeb;
+      --link: #0a6dbd;
+      --shadow: none;
+    }
+  }
+  :root[data-theme="dark"] {
+    --bg: #0b0d10; --bg-raised: #12151a; --border: #232830; --text: #e7e9ec;
+    --text-dim: #9aa3af; --accent: #6ee7b7; --accent-strong: #34d399;
+    --code-bg: #0f1216; --badge-bg: #171b21; --link: #7dd3fc;
+  }
+  :root[data-theme="light"] {
+    --bg: #fbfbfa; --bg-raised: #ffffff; --border: #e4e2dd; --text: #1c1e21;
+    --text-dim: #5b6169; --accent: #0f9d68; --accent-strong: #0a7a4f;
+    --code-bg: #f3f2ee; --badge-bg: #f0efeb; --link: #0a6dbd;
+  }
+
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--text);
+    font: 16px/1.6 -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+    -webkit-font-smoothing: antialiased;
+  }
+  code, pre, .mono {
+    font-family: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+  }
+
+  a { color: var(--link); text-decoration: none; }
+  a:hover { text-decoration: underline; }
+
+  .wrap {
+    max-width: 880px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  header.site {
+    border-bottom: 1px solid var(--border);
+    position: sticky;
+    top: 0;
+    background: color-mix(in srgb, var(--bg) 88%, transparent);
+    backdrop-filter: blur(8px);
+    z-index: 10;
+  }
+  .nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 0;
+    gap: 16px;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 600;
+    color: var(--text);
+    font-size: 15px;
+  }
+  .brand:hover { text-decoration: none; }
+  .brand .dot { color: var(--accent-strong); }
+  .navlinks {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    font-size: 14px;
+  }
+  .navlinks a { color: var(--text-dim); }
+  .navlinks a:hover { color: var(--text); }
+
+  .hero {
+    padding: 72px 0 48px;
+    border-bottom: 1px solid var(--border);
+  }
+  .badges {
+    display: flex;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin-bottom: 22px;
+  }
+  .badge {
+    font-size: 12px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    background: var(--badge-bg);
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+    padding: 3px 8px;
+    border-radius: 4px;
+  }
+  h1 {
+    font-size: 40px;
+    line-height: 1.15;
+    margin: 0 0 16px;
+    letter-spacing: -0.02em;
+  }
+  .lede {
+    font-size: 18px;
+    color: var(--text-dim);
+    max-width: 62ch;
+    margin: 0 0 28px;
+  }
+  .cta-row {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 1px solid var(--border);
+  }
+  .btn:hover { text-decoration: none; }
+  .btn.primary {
+    background: var(--accent-strong);
+    color: #04140d;
+    border-color: var(--accent-strong);
+  }
+  .btn.primary:hover { background: var(--accent); }
+  .btn.ghost {
+    background: transparent;
+    color: var(--text);
+  }
+  .btn.ghost:hover { background: var(--bg-raised); }
+
+  section {
+    padding: 56px 0;
+    border-bottom: 1px solid var(--border);
+  }
+  section:last-of-type { border-bottom: none; }
+
+  .eyebrow {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent-strong);
+    margin: 0 0 8px;
+  }
+  h2 {
+    font-size: 26px;
+    margin: 0 0 18px;
+    letter-spacing: -0.01em;
+  }
+  section > p {
+    color: var(--text-dim);
+    max-width: 68ch;
+  }
+
+  .flow {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+    margin: 28px 0;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    font-size: 14px;
+  }
+  .flow .step {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 10px 14px;
+    box-shadow: var(--shadow);
+  }
+  .flow .arrow { color: var(--text-dim); }
+
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: 16px;
+    margin-top: 24px;
+  }
+  .card {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow);
+  }
+  .card h3 {
+    margin: 0 0 8px;
+    font-size: 15px;
+  }
+  .card p {
+    margin: 0;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+
+  pre {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+    overflow-x: auto;
+    font-size: 13px;
+    line-height: 1.55;
+  }
+  code.inline {
+    background: var(--code-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 1px 5px;
+    font-size: 0.9em;
+  }
+
+  .principles {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 14px;
+  }
+  .principles li {
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    font-size: 14px;
+    color: var(--text-dim);
+  }
+  .principles .n {
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+    color: var(--accent-strong);
+    font-weight: 600;
+    flex-shrink: 0;
+  }
+  .principles strong { color: var(--text); }
+
+  .skill-card {
+    background: var(--bg-raised);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 18px 20px;
+  }
+  .skill-card h3 {
+    margin: 0 0 6px;
+    font-size: 16px;
+    font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  }
+  .skill-card p {
+    margin: 0 0 10px;
+    color: var(--text-dim);
+    font-size: 14px;
+  }
+  .skill-card .use {
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .skill-card .use strong { color: var(--text); font-weight: 600; }
+
+  ol.steps {
+    margin: 24px 0 0;
+    padding-left: 20px;
+  }
+  ol.steps li {
+    margin-bottom: 12px;
+    color: var(--text-dim);
+  }
+  ol.steps li strong { color: var(--text); }
+
+  .resource-list {
+    list-style: none;
+    margin: 24px 0 0;
+    padding: 0;
+  }
+  .resource-list li {
+    border-bottom: 1px solid var(--border);
+    padding: 14px 0;
+    display: flex;
+    justify-content: space-between;
+    gap: 16px;
+    align-items: baseline;
+    flex-wrap: wrap;
+  }
+  .resource-list li:last-child { border-bottom: none; }
+  .resource-list a { font-weight: 600; }
+  .resource-list span { color: var(--text-dim); font-size: 14px; }
+
+  footer {
+    padding: 32px 0 56px;
+    color: var(--text-dim);
+    font-size: 13px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+  footer a { color: var(--text-dim); }
+  footer a:hover { color: var(--text); }
+
+  @media (max-width: 560px) {
+    h1 { font-size: 30px; }
+    .hero { padding: 48px 0 36px; }
+    section { padding: 40px 0; }
+  }
+</style>
+</head>
+<body>
+
+<header class="site">
+  <div class="wrap nav">
+    <a class="brand" href="#top">📄<span>&nbsp;Common Docs</span></a>
+    <nav class="navlinks">
+      <a href="#introduction">Introduction</a>
+      <a href="#why">Why use it</a>
+      <a href="#structure">Structure</a>
+      <a href="#skills">Skills</a>
+      <a href="#start">Get started</a>
+      <a href="https://github.com/velvet-tiger/common-docs">GitHub</a>
+    </nav>
+  </div>
+</header>
+
+<div id="top" class="wrap">
+  <section class="hero" style="border-bottom:none;">
+    <div class="badges">
+      <span class="badge">spec v1.2</span>
+      <span class="badge">OKF v0.2 conformant</span>
+      <span class="badge">MIT license</span>
+    </div>
+    <h1>A standard <code class="inline">docs/</code> directory structure for project documentation.</h1>
+    <p class="lede">Common Docs defines a fixed directory structure, a naming convention, and required content for every file in a project's <code class="inline">docs/</code> folder. The same structure applies in every repo. Built for human contributors and AI coding agents. Conforms to OKF v0.2.</p>
+    <div class="cta-row">
+      <a class="btn primary" href="specification.md">Read the specification</a>
+      <a class="btn ghost" href="https://github.com/velvet-tiger/common-docs">View on GitHub</a>
+    </div>
+  </section>
+</div>
+
+<div class="wrap">
+
+<section id="introduction">
+  <p class="eyebrow">Introduction</p>
+  <h2>What it is</h2>
+  <p>Common Docs organizes project documentation using a progressive disclosure model. A reader, human or agent, moves through the structure in a fixed order: domain context, then system design, then decisions and implementation detail, then operations.</p>
+  <div class="flow">
+    <div class="step">Context</div>
+    <div class="arrow">→</div>
+    <div class="step">Architecture</div>
+    <div class="arrow">→</div>
+    <div class="step">Implementation</div>
+    <div class="arrow">→</div>
+    <div class="step">Operations</div>
+  </div>
+  <p>Every directory has an <code class="inline">index.md</code> that lists its contents. Finding an answer does not require scanning the whole tree.</p>
+  <p>Plans describe the future. ADRs record the past. Architecture describes the present. The specification keeps these three separate. A document is a proposal, a decision, or the current state, never a mix.</p>
+</section>
+
+<section id="why">
+  <p class="eyebrow">Why use it</p>
+  <h2>Agents and contributors use the same structure</h2>
+  <p>AI coding agents read project documentation before making changes. Common Docs gives them a fixed entry point, a fixed location for domain terms, and one current source for architecture, instead of a guess across old PRs and comments. Human contributors get the same fixed layout.</p>
+  <ul class="principles">
+    <li><span class="n">01</span><span><strong>Context before detail.</strong> Domain first, then design, then implementation.</span></li>
+    <li><span class="n">02</span><span><strong>Every directory has an index.</strong> No need to scan the tree.</span></li>
+    <li><span class="n">03</span><span><strong>One concern per file.</strong> Split files over about 300 lines.</span></li>
+    <li><span class="n">04</span><span><strong>kebab-case, lowercase.</strong> No spaces.</span></li>
+    <li><span class="n">05</span><span><strong>Frontmatter on every file.</strong> title, description, status, updated. Enables index generation.</span></li>
+    <li><span class="n">06</span><span><strong>Plans, ADRs, and architecture are separate.</strong> Future, past, and present are not conflated.</span></li>
+    <li><span class="n">07</span><span><strong>Curated, not a wiki.</strong> Stale docs are updated or deleted.</span></li>
+    <li><span class="n">08</span><span><strong>Agents start at the index.</strong> <code class="inline">AGENTS.md</code> / <code class="inline">CLAUDE.md</code> reference <code class="inline">docs/index.md</code> directly.</span></li>
+  </ul>
+</section>
+
+<section id="okf">
+  <p class="eyebrow">Compatibility</p>
+  <h2>OKF v0.2 conformance</h2>
+  <p>A <code class="inline">docs/</code> tree built to this specification is a valid bundle under <a href="https://github.com/GoogleCloudPlatform/knowledge-catalog/blob/main/okf/SPEC.md">Open Knowledge Format (OKF) v0.2</a>. Every non-reserved file carries a <code class="inline">type</code> field. <code class="inline">index.md</code> files carry no frontmatter except the bundle root's <code class="inline">okf_version</code>. OKF-aware tooling, search indexes, and other agent consumers can traverse and read the tree without custom integration work. Fields such as <code class="inline">status</code> and <code class="inline">updated</code> are producer-defined extensions. OKF requires consumers to tolerate them.</p>
+</section>
+
+<section id="structure">
+  <p class="eyebrow">Docs</p>
+  <h2>Directory structure</h2>
+  <p>The full layout:</p>
+  <pre><code>docs/
+├── index.md                    # Master entry point
+├── context/                    # Why we exist, who we serve, domain vocabulary
+├── architecture/               # Current system design
+├── adr/                        # Architecture Decision Records
+├── plans/                      # Future work, roadmap, feature specs
+├── api/                        # API reference
+├── configuration/              # Configuration reference
+├── integrations/               # Third-party integrations
+├── security/                   # Security posture and practices
+├── guides/                     # How-to guides for humans and agents
+├── operations/                 # Production operations
+├── migrations/                 # Database and data migrations
+└── changelog/                  # Release history</code></pre>
+  <p>Required content for each file, what <code class="inline">architecture/overview.md</code> must cover, what belongs in an ADR, what a runbook needs, is defined in the <a href="specification.md">specification</a>.</p>
+</section>
+
+<section id="skills">
+  <p class="eyebrow">Docs</p>
+  <h2>Agent skills</h2>
+  <p>Five skills for creating, writing, and maintaining a Common Docs tree. Each is scoped to one job.</p>
+  <div class="grid">
+    <div class="skill-card">
+      <h3>common-docs-scaffold</h3>
+      <p>Scaffolds the standard <code class="inline">docs/</code> structure. Creates every section directory and stub file with correct frontmatter.</p>
+      <div class="use"><strong>Use when:</strong> setting up docs for the first time.</div>
+    </div>
+    <div class="skill-card">
+      <h3>common-docs-write</h3>
+      <p>Writes the real content for one file. Runs a targeted interview, explores the codebase to fill in what it can, then produces a complete document with no placeholders.</p>
+      <div class="use"><strong>Use when:</strong> filling in a specific file, such as an architecture overview, a threat model, or an ADR.</div>
+    </div>
+    <div class="skill-card">
+      <h3>common-docs-write-all</h3>
+      <p>Writes substantive content for every file in the structure in one pass, scaffolding first if needed.</p>
+      <div class="use"><strong>Use when:</strong> documenting an entire project at once.</div>
+    </div>
+    <div class="skill-card">
+      <h3>common-docs-find</h3>
+      <p>Maps a question or topic to the exact file that should answer it, using a fixed lookup table.</p>
+      <div class="use"><strong>Use when:</strong> you need to know where something is, or where it should go.</div>
+    </div>
+    <div class="skill-card">
+      <h3>common-docs-convert-to-okf</h3>
+      <p>Retrofits an existing tree for OKF v0.2 conformance: adds the required <code class="inline">type</code> field, strips stray frontmatter from <code class="inline">index.md</code> files. A metadata patch, not a content rewrite.</p>
+      <div class="use"><strong>Use when:</strong> an older tree needs to catch up to the current spec.</div>
+    </div>
+  </div>
+</section>
+
+<section id="start">
+  <p class="eyebrow">Docs</p>
+  <h2>Get started</h2>
+  <ol class="steps">
+    <li>
+      <strong>Get Common Docs.</strong> Pick one:
+      <div style="display:flex;flex-direction:column;gap:12px;margin-top:14px;max-width:480px;">
+        <div class="card">
+          <h3 style="margin:0 0 12px;font-size:14px;">Install in Automatic</h3>
+          <a href="https://tryautomatic.app/install?repo=velvet-tiger/common-docs">
+            <img src="https://tryautomatic.app/badges/install.svg" alt="Install in Automatic" height="32">
+          </a>
+          <p style="margin:10px 0 0;font-size:13px;"><a href="https://tryautomatic.app">tryautomatic.app</a></p>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 12px;font-size:14px;">Install with npx</h3>
+          <pre style="margin:0;padding:12px 14px;white-space:pre-wrap;word-break:break-all;overflow-x:visible;"><code>npx skills add velvet-tiger/common-docs@common-docs-write-all</code></pre>
+        </div>
+        <div class="card">
+          <h3 style="margin:0 0 12px;font-size:14px;">Clone the repo</h3>
+          <pre style="margin:0;padding:12px 14px;white-space:pre-wrap;word-break:break-all;overflow-x:visible;"><code>git clone https://github.com/velvet-tiger/common-docs.git</code></pre>
+        </div>
+      </div>
+    </li>
+    <li><strong>Build the docs.</strong> Run the <code class="inline">common-docs-write-all</code> skill. It scaffolds <code class="inline">docs/</code> if it does not exist yet, then writes complete content for every file based on your codebase.</li>
+    <li><strong>Point your agent at it.</strong> Add the reference block below to <code class="inline">AGENTS.md</code> or <code class="inline">CLAUDE.md</code>.</li>
+  </ol>
+  <pre><code>## Documentation
+
+All project documentation is in `docs/`. Always start at `docs/index.md`.
+
+| Section | Path | Contains |
+|---------|------|----------|
+| Domain &amp; product context | `docs/context/` | Terminology, goals, stakeholders |
+| System design | `docs/architecture/` | Current architecture, data model, infrastructure |
+| Decision log | `docs/adr/` | Immutable record of architectural decisions |
+| Future work | `docs/plans/` | Roadmap, epics, feature specs |
+| API reference | `docs/api/` | Endpoints, auth, errors |
+| Configuration | `docs/configuration/` | Env vars, flags, secrets reference |
+| Integrations | `docs/integrations/` | Third-party system docs |
+| Security | `docs/security/` | Threat model, auth design, data handling |
+| How-to guides | `docs/guides/` | Setup, development, deployment, contributing |
+| Production ops | `docs/operations/` | Monitoring, runbooks, disaster recovery |
+| Migration log | `docs/migrations/` | DB and data migration history |
+| Release history | `docs/changelog/` | What changed in each release |</code></pre>
+</section>
+
+<section id="prompt">
+  <p class="eyebrow">Docs</p>
+  <h2>Prompt for an LLM</h2>
+  <p>No skill installed. Paste this into any LLM with access to your codebase.</p>
+  <pre id="llm-prompt"><code>Set up documentation for this project using the Common Docs specification:
+https://raw.githubusercontent.com/velvet-tiger/common-docs/main/specification.md
+
+1. Read the specification at that URL.
+2. Create the docs/ directory structure it defines, with correct frontmatter on every file.
+3. Read the codebase, README, and config files to gather real project detail.
+4. Write complete, substantive content for every file. No placeholders or TODOs.
+5. Add the documentation reference block to AGENTS.md or CLAUDE.md, pointing to docs/index.md.
+
+If a fact cannot be found in the codebase, say it is not yet defined instead of inventing it.</code></pre>
+  <button class="btn ghost" id="copy-prompt" type="button" style="margin-top:14px;cursor:pointer;">Copy prompt</button>
+</section>
+
+<section id="resources" style="border-bottom:none;">
+  <p class="eyebrow">Resources</p>
+  <h2>Links</h2>
+  <ul class="resource-list">
+    <li><a href="specification.md">Specification</a><span>Full directory structure, frontmatter rules, and per-file content requirements</span></li>
+    <li><a href="README.md">README</a><span>Project overview and quick start</span></li>
+    <li><a href="https://github.com/velvet-tiger/common-docs">GitHub repository</a><span>Source, issues, and the skills directory</span></li>
+    <li><a href="https://tryautomatic.app">Automatic</a><span>Common Docs is available as a plugin</span></li>
+    <li><a href="LICENSE">License</a><span>MIT</span></li>
+  </ul>
+</section>
+
+</div>
+
+<footer class="wrap">
+  <span>Common Docs is copyright <a href="https://github.com/xtfer">Christopher Skene</a>. MIT License.</span>
+  <span><a href="https://github.com/velvet-tiger/common-docs">github.com/velvet-tiger/common-docs</a></span>
+</footer>
+
+<script>
+(function () {
+  var btn = document.getElementById('copy-prompt');
+  var pre = document.getElementById('llm-prompt');
+  if (!btn || !pre || !navigator.clipboard) return;
+  btn.addEventListener('click', function () {
+    navigator.clipboard.writeText(pre.textContent).then(function () {
+      btn.textContent = 'Copied';
+      setTimeout(function () { btn.textContent = 'Copy prompt'; }, 1500);
+    }, function () {
+      // permission denied or unavailable; text is still selectable manually
+    });
+  });
+})();
+</script>
+</body>
+</html>
