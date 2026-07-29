@@ -67,6 +67,25 @@
         "find",
         "lookup"
       ]
+    },
+    {
+      "name": "common-docs-write-all",
+      "path": "./skills/common-docs-write-all",
+      "description": "Write complete, substantive content for every documentation file in the standard Common docs/ structure. Run common-docs-scaffold first if the docs/ directory does not exist. Use when asked to \"write all the docs\", \"populate all documentation\", \"fill in all docs\", or \"document everything\".",
+      "category": "documents",
+      "tags": [
+        "documentation",
+        "docs",
+        "write",
+        "automatic",
+        "content",
+        "bulk",
+        "all",
+        "scaffold",
+        "adr",
+        "architecture",
+        "runbook"
+      ]
     }
   ]
 }
