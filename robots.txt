@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://velvet-tiger.github.io/common-docs/sitemap.xml
