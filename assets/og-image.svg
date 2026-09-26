@@ -9,13 +9,13 @@
   <text x="90" y="378" font-family="Helvetica Neue, Helvetica, Arial, sans-serif" font-size="30" fill="#9aa3af">Built for human contributors and AI coding agents.</text>
 
   <rect x="90" y="450" width="168" height="46" rx="6" fill="#171b21" stroke="#232830"/>
-  <text x="112" y="480" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa3af">spec v1.2</text>
+  <text x="112" y="480" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa3af">spec v1.3</text>
 
   <rect x="272" y="450" width="300" height="46" rx="6" fill="#171b21" stroke="#232830"/>
   <text x="294" y="480" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa3af">OKF v0.2 conformant</text>
 
   <rect x="586" y="450" width="168" height="46" rx="6" fill="#171b21" stroke="#232830"/>
-  <text x="608" y="480" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa3af">MIT license</text>
+  <text x="608" y="480" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#9aa3af">CC BY 4.0</text>
 
   <text x="1110" y="595" font-family="ui-monospace, Menlo, monospace" font-size="22" fill="#5b6169" text-anchor="end">github.com/velvet-tiger/common-docs</text>
 </svg>

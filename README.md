@@ -111,4 +111,8 @@ This specification is versioned and maintained.
 
 ## License
 
-MIT License - see [LICENSE](LICENSE)
+Common Docs v1.3 and later are licensed under [Creative Commons Attribution 4.0 International](https://creativecommons.org/licenses/by/4.0/). When you share the specification or an adaptation, retain attribution to Christopher Skene, link to the licence, and indicate any changes you made. Version 1.2 remains available under its original MIT licence.
+
+## Name use
+
+“Common Docs” refers to this specification. Derivatives should describe themselves as “based on Common Docs”, rather than using “Common Docs” as their own name.
